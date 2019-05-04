@@ -2,7 +2,7 @@
 
 This project has been developed using [Create React App](https://github.com/facebook/create-react-app) with typescript.
 
-![alt text][prreview.svg]
+![Preview][preview.svg]
 
 ## Launch
 
