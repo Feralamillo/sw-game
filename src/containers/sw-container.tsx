@@ -1,8 +1,9 @@
 import React from 'react';
+import axios from 'axios';
 
 import SWGame from '../components/sw-game';
 import { cardData } from '../core/types';
-import { LEIA_EXAMPLE } from '../core/constants';
+import { getRandomIntInclusive } from '../utils/utils';
 
 export interface State {
   cardData: Array<cardData> | null;
@@ -42,10 +43,35 @@ class SWContainer extends React.Component<{}, State> {
     );
   }
 
-  private handleAPICall = (): void => {
-    this.setState({
-      cardData: [LEIA_EXAMPLE, LEIA_EXAMPLE]
-    });
+  private handleAPICall = async () => {
+
+    // constrain with a min and max number.
+    // ensure not getting the same number.
+    // This should go in utils functions
+    const num1 = getRandomIntInclusive(1, 87);
+    let num2 = getRandomIntInclusive(1, 87);
+
+    while (num1 === num2) {
+      num2 = getRandomIntInclusive(1, 87);
+    }
+    // until here
+
+    try {
+      // Fire a Promise.All to get the 2 request
+      const response = await Promise.all([
+        axios.get(`https://swapi.co/api/people/${num1}/`),
+        axios.get(`https://swapi.co/api/people/${num2}/`),
+
+      ]);
+      this.setState({
+        cardData: response.map((res) => res.data)
+      });
+    } catch {
+      this.setState({
+        cardData: null
+      });
+    }
+
   }
 }
 
