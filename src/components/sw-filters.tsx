@@ -5,8 +5,10 @@ import React from 'react';
  */
 const SWFilters: React.FC = () => {
   return (
-    <div>
-      This is the Filters
+    <div className="container">
+      <div className="row justify-content-md-center">
+        This is the Filters
+      </div>
     </div>
   );
 }
