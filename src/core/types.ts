@@ -19,5 +19,5 @@ export interface People {
 
 export interface CardData {
   name: string;
-  metric: string; 
+  metric: number; 
 }

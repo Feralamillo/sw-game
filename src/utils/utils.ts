@@ -8,17 +8,15 @@ export const getRandomIntInclusive = (min: number, max: number): number => {
 
 export const findWinner = (data: Array<CardData>): string => {
   const max = data.reduce((prev, current) => (prev.metric > current.metric) ? prev : current);
-
-  // @TODO: If the metric is unknown. Currently returning that as the biggest.
   return max.name;
 }
 
-export const transformPeopleAPIData = (resource: string, dataIn: People):CardData | null => {
+export const transformPeopleAPIData = (resource: string, dataIn: People): CardData | null => {
   if (resource === 'people') {
     const { name, height: metric } = dataIn;
-    const cardData = { name, metric }
+    // If the metric is unknown return 0
+    const cardData = { name, metric: Number(metric) ? Number(metric) : 0 }
     return cardData;
   }
-
   return null;
 }
