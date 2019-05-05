@@ -1,7 +1,53 @@
-.sw-card-wrapper {
-  width: 200px;
+@keyframes spinning {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
 }
 
-.sw-board {
+.card {
+  height: 50vh;
+  background: black;
+}
+
+.loading-card {
+  border: transparent;
+}
+
+.flip {
+	transform-style: preserve-3d;
+	position: relative;
+  animation: spinning 3s infinite;
+  height: 100%;
+  width: 100%;
+}
+
+.card-img {
+  backface-visibility: hidden;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+	top: 0;
+	left: 0;
+}
+
+.card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+.card-img-overlay {
   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card-img-opacity {
+  opacity: 0.5;
 }

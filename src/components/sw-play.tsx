@@ -12,7 +12,7 @@ export class SWPlay extends React.Component<Props>{
     const { triggerButton } = this.props;
     
     return (
-      <div className="container">
+      <div className="container p-5">
         <div className="row justify-content-md-center">
           <button 
             type="button" 

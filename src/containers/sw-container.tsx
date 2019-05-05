@@ -5,9 +5,10 @@ import SWGame from '../components/sw-game';
 import { cardData } from '../core/types';
 import { getRandomIntInclusive } from '../utils/utils';
 
+import './sw-container.css';
+
 export interface State {
-  cardData: Array<cardData> | undefined;
-  loading: boolean;
+  cardData: Array<cardData | null> | undefined;
 }
 /**
  * Handles the API Call
@@ -18,19 +19,17 @@ class SWContainer extends React.Component<{}, State> {
     super(props);
     this.state = {
       cardData: undefined,
-      loading: false
     };
   }
 
   public render() {
-    const { cardData, loading } = this.state;
+    const { cardData } = this.state;
 
     return (
-      <div className="container h-100">
+      <div className="container h-100 sw-background">
         <SWGame 
           cardData={cardData} 
           triggerButton={this.triggerButton}
-          loading={loading}
         />
       </div>
     );
@@ -38,8 +37,7 @@ class SWContainer extends React.Component<{}, State> {
 
   private triggerButton = () => {
     this.setState({
-      cardData: undefined,
-      loading: true
+      cardData: [null, null],
     })
     this.handleAPICall()
   }
@@ -60,8 +58,7 @@ class SWContainer extends React.Component<{}, State> {
       ]);
       setTimeout(() => {
         this.setState({
-          cardData: response.map((res) => res.data),
-          loading: false
+          cardData: response.map((res) => res.data)
         })
       }, 2000);
     } catch {

@@ -5,9 +5,8 @@ import SWPlay from './sw-play';
 import { cardData } from '../core/types';
 
 export interface Props {
-  cardData: Array<cardData> | undefined;
+  cardData: Array<cardData | null> | undefined;
   triggerButton: () => void;
-  loading: boolean;
 }
 
 /**
@@ -15,12 +14,12 @@ export interface Props {
  */
 export class SWGame extends React.Component<Props>{ 
   public render(){
-    const { cardData, triggerButton, loading } = this.props;
+    const { cardData, triggerButton } = this.props;
 
     return (
       <div>
         <SWFilters />
-        <SWBoard cardData={cardData} loading={loading} />
+        <SWBoard cardData={cardData} />
         <SWPlay triggerButton={triggerButton} />
       </div>
     );

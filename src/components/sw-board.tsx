@@ -6,8 +6,7 @@ import { cardData } from '../core/types';
 import './components.css';
 
 export interface Props {
-  cardData: Array<cardData> | undefined;
-  loading: boolean;
+  cardData: Array<cardData | null> | undefined;
 }
 
 /**
@@ -15,11 +14,11 @@ export interface Props {
  */
 export class SWBoard extends React.Component<Props>{ 
   public render() {
-    const { cardData, loading } = this.props;
+    const { cardData } = this.props;
 
-    if(!cardData && !loading) {
+    if(!cardData) {
       return (
-        <div className="container h-100">
+        <div className="container h-100 p-5">
           <div className="row justify-content-md-center">
             Press play to start the game
           </div>
@@ -27,25 +26,15 @@ export class SWBoard extends React.Component<Props>{
       )
     }
 
-    if (!cardData) {
-      return (
-        <div className="container h-100">
-          <div className="row justify-content-md-center">
-          <div className="d-flex justify-content-center">
-            <div className="spinner-border" role="status">
-              <span className="sr-only">Loading...</span>
-            </div>
-          </div>
-          </div>
-        </div>
-      )
-    }
-
     return (
-      <div className="container">
+      <div className="container p-5">
         <div className="row justify-content-md-center">
-          <SWCard cardData={cardData[0]} />
-          <SWCard cardData={cardData[1]} />
+          {cardData.map((card, index) => (
+            <SWCard
+              key={index}
+              cardData={card}
+            />
+          ))}
         </div>
       </div>
     );
