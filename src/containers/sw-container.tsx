@@ -2,13 +2,14 @@ import React from 'react';
 import axios from 'axios';
 
 import SWGame from '../components/sw-game';
-import { cardData } from '../core/types';
-import { getRandomIntInclusive } from '../utils/utils';
+import { CardData } from '../core/types';
+import { getRandomIntInclusive, transformPeopleAPIData, findWinner } from '../utils/utils';
 
 export interface State {
-  cardData: Array<cardData | null> | undefined;
+  cardData: Array<CardData | null> | undefined;
   resource: string | undefined;
   points: number | undefined;
+  winner: string | undefined;
 }
 /**
  * Handles the API Call
@@ -20,12 +21,13 @@ class SWContainer extends React.Component<{}, State> {
     this.state = {
       cardData: undefined,
       resource: undefined,
-      points: undefined
+      points: undefined,
+      winner: undefined
     };
   }
 
   public render() {
-    const { cardData, resource } = this.state;
+    const { cardData, resource, winner } = this.state;
 
     return (
       <div className="container h-100 sw-background">
@@ -34,6 +36,7 @@ class SWContainer extends React.Component<{}, State> {
           resource={resource}
           cardData={cardData} 
           triggerButton={this.triggerButton}
+          winner={winner}
         />
       </div>
     );
@@ -43,7 +46,7 @@ class SWContainer extends React.Component<{}, State> {
     this.setState({
       cardData: [null, null],
     })
-    this.handleAPICall()
+    this.handleGame()
   }
 
   private selectGame = (resource: string, points: number) => {
@@ -53,7 +56,11 @@ class SWContainer extends React.Component<{}, State> {
     })
   }
 
-  private handleAPICall = async () => {
+  private handleGame = async () => {
+    const { resource } = this.state;
+    if(!resource) {
+      return;
+    }
     // This should go in utils functions
     const num1 = getRandomIntInclusive(1, 87);
     let num2 = getRandomIntInclusive(1, 87);
@@ -62,22 +69,29 @@ class SWContainer extends React.Component<{}, State> {
       num2 = getRandomIntInclusive(1, 87);
     }
 
-    try {
-      const response = await Promise.all([
-        axios.get(`https://swapi.co/api/people/${num1}/`),
-        axios.get(`https://swapi.co/api/people/${num2}/`)
-      ]);
-      setTimeout(() => {
-        this.setState({
-          cardData: response.map((res) => res.data)
-        })
-      }, 2000);
-    } catch {
+    const response = await Promise.all([
+      this.handleAPICall(resource, num1),
+      this.handleAPICall(resource, num2)
+    ]);
+    // @TODO: What happens if we receive null??
+    const cardData = response.map((res) => res as CardData );
+    const winner = findWinner(cardData);
+    setTimeout(() => {
       this.setState({
-        cardData: undefined
-      });
-    }
+        cardData,
+        winner
+      })
+    }, 2000);
+  }
 
+  private handleAPICall = async (resource: string, num: number): Promise<CardData | null> => {
+    try {
+      const response = await axios.get(`https://swapi.co/api/${resource}/${num}/`);
+      return transformPeopleAPIData(resource, response.data); 
+    } catch (error) {
+      console.log(`Error while fetching: ${error}`)
+      return null
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-export interface cardData {
+export interface People {
   name: string; 
   height: string; 
   mass: string; 
@@ -15,4 +15,9 @@ export interface cardData {
   created: string; 
   edited: string; 
   url: string
+}
+
+export interface CardData {
+  name: string;
+  metric: string; 
 }

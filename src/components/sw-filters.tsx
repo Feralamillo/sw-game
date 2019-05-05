@@ -26,37 +26,38 @@ export class SWFilters extends React.Component<Props, State>{
     const { resource, points } = this.state;
 
     return (
-      <div className="container">
-        <div className="row justify-content-md-center">
-          <form onSubmit={this.handleSubmit}>
-            <div className="form-group">
-              <label>
-                <div>
-                  Pick the resource you want to play:
-                </div>
-                <select name="resource" value={resource} onChange={this.handleSelectChange}>
-                  <option value="people">People</option>
-                  <option value="planets">Planets</option>
-                  <option value="species">Species</option>
-                  <option value="starships">Starships</option>
-                  <option value="vehicles">Vehicles</option>
-                </select>
-              </label>
+      <form onSubmit={this.handleSubmit}>
+        <div className="form-group">
+          <label>
+            <div>
+              Pick the resource you want to play:
             </div>
-            <div className="form-group">
-              <label>
-                <div>
-                  Number of games to play:
-                </div>
-                <input name="points" type="number" value={points} onChange={this.handleInputChange} />
-              </label>
-            </div>
-            <div className="form-group">
-              <input type="submit" value="Submit" />
-            </div>
-          </form>
+            <select name="resource" value={resource} onChange={this.handleSelectChange}>
+              <option value="people">People</option>
+              <option value="planets">Planets</option>
+              <option value="species">Species</option>
+              <option value="starships">Starships</option>
+              <option value="vehicles">Vehicles</option>
+            </select>
+          </label>
         </div>
-      </div>
+        <div className="form-group">
+          <label>
+            <div>
+              Number of games to play:
+            </div>
+            <input 
+              name="points" 
+              type="number" 
+              value={points} 
+              onChange={this.handleInputChange} 
+            />
+          </label>
+        </div>
+        <div className="form-group">
+          <input type="submit" value="Submit" />
+        </div>
+      </form>
     );
   }
 

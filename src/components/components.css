@@ -8,8 +8,11 @@
 }
 
 .card {
-  height: 50vh;
   background: black;
+}
+
+.sw-card {
+  height: 50vh;
 }
 
 .loading-card {

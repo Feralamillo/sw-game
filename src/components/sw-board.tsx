@@ -1,12 +1,14 @@
 import React from 'react';
 
 import SWCard from './sw-card';
-import { cardData } from '../core/types';
+import { CardData } from '../core/types';
 
 import './components.css';
 
 export interface Props {
-  cardData: Array<cardData | null> | undefined;
+  cardData: Array<CardData | null> | undefined;
+  resource: string;
+  winner: string | undefined;
 }
 
 /**
@@ -14,11 +16,14 @@ export interface Props {
  */
 export class SWBoard extends React.Component<Props>{ 
   public render() {
-    const { cardData } = this.props;
+    const { cardData, resource, winner } = this.props;
 
     if(!cardData) {
       return (
         <div className="container h-100 p-5">
+          <div className="row justify-content-md-center">
+            <h2>Playing {resource}</h2>
+          </div>
           <div className="row justify-content-md-center">
             Press play to start the game
           </div>
@@ -29,6 +34,9 @@ export class SWBoard extends React.Component<Props>{
     return (
       <div className="container p-5">
         <div className="row justify-content-md-center">
+          <h2>Playing {resource}</h2>
+        </div>
+        <div className="row justify-content-md-center">
           {cardData.map((card, index) => (
             <SWCard
               key={index}
@@ -36,6 +44,11 @@ export class SWBoard extends React.Component<Props>{
             />
           ))}
         </div>
+        {winner && (
+          <div className="row justify-content-md-center">
+            <h2>Winner: {winner}</h2>
+          </div>
+        )}
       </div>
     );
   }
