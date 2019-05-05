@@ -7,6 +7,8 @@ import { cardData } from '../core/types';
 export interface Props {
   cardData: Array<cardData | null> | undefined;
   triggerButton: () => void;
+  selectGame: (resource: string, points: number) => void;
+  resource: string | undefined;
 }
 
 /**
@@ -14,13 +16,17 @@ export interface Props {
  */
 export class SWGame extends React.Component<Props>{ 
   public render(){
-    const { cardData, triggerButton } = this.props;
+    const { cardData, triggerButton, selectGame, resource } = this.props;
 
     return (
       <div>
-        <SWFilters />
-        <SWBoard cardData={cardData} />
-        <SWPlay triggerButton={triggerButton} />
+        <SWFilters selectGame={selectGame} />
+        {resource && (
+          <React.Fragment>
+            <SWBoard cardData={cardData} />
+            <SWPlay triggerButton={triggerButton} />
+          </React.Fragment>
+        )}
       </div>
     );
   }

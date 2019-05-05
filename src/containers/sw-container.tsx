@@ -5,10 +5,10 @@ import SWGame from '../components/sw-game';
 import { cardData } from '../core/types';
 import { getRandomIntInclusive } from '../utils/utils';
 
-import './sw-container.css';
-
 export interface State {
   cardData: Array<cardData | null> | undefined;
+  resource: string | undefined;
+  points: number | undefined;
 }
 /**
  * Handles the API Call
@@ -19,15 +19,19 @@ class SWContainer extends React.Component<{}, State> {
     super(props);
     this.state = {
       cardData: undefined,
+      resource: undefined,
+      points: undefined
     };
   }
 
   public render() {
-    const { cardData } = this.state;
+    const { cardData, resource } = this.state;
 
     return (
       <div className="container h-100 sw-background">
         <SWGame 
+          selectGame={this.selectGame}
+          resource={resource}
           cardData={cardData} 
           triggerButton={this.triggerButton}
         />
@@ -40,6 +44,13 @@ class SWContainer extends React.Component<{}, State> {
       cardData: [null, null],
     })
     this.handleAPICall()
+  }
+
+  private selectGame = (resource: string, points: number) => {
+    this.setState({
+      resource, 
+      points
+    })
   }
 
   private handleAPICall = async () => {
