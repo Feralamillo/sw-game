@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/sw-game/static/css/main.f56728f9.chunk.css",
-    "main.js": "/sw-game/static/js/main.4f2da570.chunk.js",
-    "main.js.map": "/sw-game/static/js/main.4f2da570.chunk.js.map",
+    "main.js": "/sw-game/static/js/main.00a1d493.chunk.js",
+    "main.js.map": "/sw-game/static/js/main.00a1d493.chunk.js.map",
     "runtime~main.js": "/sw-game/static/js/runtime~main.a6984e46.js",
     "runtime~main.js.map": "/sw-game/static/js/runtime~main.a6984e46.js.map",
     "static/js/2.f4f84f3f.chunk.js": "/sw-game/static/js/2.f4f84f3f.chunk.js",
     "static/js/2.f4f84f3f.chunk.js.map": "/sw-game/static/js/2.f4f84f3f.chunk.js.map",
     "index.html": "/sw-game/index.html",
-    "precache-manifest.803f33f98df65006e0cd001850933da0.js": "/sw-game/precache-manifest.803f33f98df65006e0cd001850933da0.js",
+    "precache-manifest.534f01304412669d037a83718e622850.js": "/sw-game/precache-manifest.534f01304412669d037a83718e622850.js",
     "service-worker.js": "/sw-game/service-worker.js",
     "static/css/main.f56728f9.chunk.css.map": "/sw-game/static/css/main.f56728f9.chunk.css.map"
   }
