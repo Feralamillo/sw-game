@@ -7,7 +7,7 @@ interface State {
   points: number;
 }
 
-interface Props {
+export interface Props {
   selectGame: (resource: string, points: number) => void;
 }
 

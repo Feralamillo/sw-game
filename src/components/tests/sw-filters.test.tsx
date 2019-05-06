@@ -1,6 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { shallow } from 'enzyme';
 
-it('should pass', () => {
-  expect(true).toBeTruthy()
+import { SWFilters, Props } from '../sw-filters';
+
+const props: Props = {
+  selectGame: jest.fn()
+};
+
+describe('<SWFilters />', () => {
+  it('should render the component', () => {
+    const component = shallow(<SWFilters {...props} />);
+
+    expect(component).toMatchSnapshot()
+  });
 });

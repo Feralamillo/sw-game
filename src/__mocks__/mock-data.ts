@@ -1,3 +1,5 @@
+import { CardData } from '../core/types';
+
 export const LEIA_EXAMPLE = {
   name: "Leia Organa", 
   height: "150", 
@@ -25,4 +27,9 @@ export const LEIA_EXAMPLE = {
   created: "2014-12-10T15:20:09.791000Z", 
   edited: "2014-12-20T21:17:50.315000Z", 
   url: "https://swapi.co/api/people/5/"
-}
+};
+
+export const MOCK_CARD: CardData = {
+    name: 'Title',
+    metric: 18
+};
