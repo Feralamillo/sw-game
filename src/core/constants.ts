@@ -6,6 +6,8 @@ export const RESOURCES = {
     VEHICLES: 'vehicles'
 } 
 
+export const BASE_API_URL ='https://swapi.co/api';
+
 export const IMG = {
     BACKGROUND_ACTIVE_CARD: 'https://hips.hearstapps.com/digitalspyuk.cdnds.net/18/31/1533225054-mark-hamill-and-carrie-fisher-star-wars.jpg?crop=0.848xw:0.896xh;0.128xw,0&resize=480:*',
     BACKGROUND_LOADING_CARD: 'https://hips.hearstapps.com/digitalspyuk.cdnds.net/18/31/1533225054-mark-hamill-and-carrie-fisher-star-wars.jpg?crop=0.848xw:0.896xh;0.128xw,0&resize=480:*',

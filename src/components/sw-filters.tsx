@@ -68,6 +68,9 @@ export class SWFilters extends React.Component<Props, State>{
     );
   }
 
+  /**
+   * Handles the data from the select
+   */
   private handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>): void => {
     const { target: { value } } = event;
     
@@ -76,6 +79,9 @@ export class SWFilters extends React.Component<Props, State>{
     });
   }
 
+  /**
+   * Handles the data from the input
+   */
   private handleInputChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const { target: { value } } = event;
     
@@ -84,6 +90,9 @@ export class SWFilters extends React.Component<Props, State>{
     });
   }
 
+  /**
+   * Handles the data when the submit botton is triggered
+   */
   private handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     const { resource, points } = this.state;
     const { selectGame } = this.props;

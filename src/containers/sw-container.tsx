@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 
 import SWGame from '../components/sw-game';
+import { BASE_API_URL } from '../core/constants';
 import { CardData } from '../core/types';
 import { getRandomIntInclusive, transformAPIData } from '../utils/utils';
 
@@ -14,7 +15,7 @@ export interface State {
   maxNumAPI: number;
 }
 /**
- * Handles the API Call
+ * Handles the API Call and main methods
  */
 class SWContainer extends React.Component<{}, State> {
 
@@ -48,13 +49,23 @@ class SWContainer extends React.Component<{}, State> {
     );
   }
 
+  /**
+   * This is a callback that gets triggered from the play component.
+   * Runs each individual game. 
+   */
   private triggerButton = () => {
+    // @TODO: make it scalable for more players creating an array
     this.setState({
       cardData: [null, null]
     });
     this.handleGame();
   }
 
+  /**
+   * Triggered from the filters component, this method sets up the game.
+   * Firstly, it gathers how many resoources there are and then sets up the state
+   * to start playing.
+   */
   private selectGame = async (resource: string, points: number) => {
     const maxNumAPI = await this.handleAPICallMaxNumber(resource);
     
@@ -68,6 +79,10 @@ class SWContainer extends React.Component<{}, State> {
     });
   }
 
+  /**
+   * Generates random numbers, gets the data for the cards,
+   * finds the winner and updates the state.
+   */
   private handleGame = async () => {
     const { resource, maxNumAPI } = this.state;
     if (!resource) {
@@ -92,6 +107,7 @@ class SWContainer extends React.Component<{}, State> {
 
     if (card1 && card2) {
       const winner = this.handleWinner(card1, card2);
+      // As the API is fast, the set time out forces the loading functionality.
       setTimeout(() => {
         this.setState({
           cardData: [card1, card2],
@@ -104,9 +120,12 @@ class SWContainer extends React.Component<{}, State> {
     // For now infinite loading until we get a response.
   }
 
+  /**
+   * Manage the GET request for the card data and returns it with the appropiate type.
+   */
   private handleAPICall = async (resource: string, num: number): Promise<CardData | null> => {
     try {
-      const response = await axios.get(`https://swapi.co/api/${resource}/${num}/`);
+      const response = await axios.get(`${BASE_API_URL}/${resource}/${num}/`);
       return transformAPIData(resource, response.data); 
     } catch (error) {
       console.log(`Error while fetching: ${error}`)
@@ -114,9 +133,12 @@ class SWContainer extends React.Component<{}, State> {
     }
   }
 
+  /**
+   * Manages the GET request for the maximum number of a resource.
+   */
   private handleAPICallMaxNumber = async (resource: string): Promise<number> => {
     try {
-      const response = await axios.get(`https://swapi.co/api/${resource}/`);
+      const response = await axios.get(`${BASE_API_URL}/${resource}/`);
       return response.data.count; 
     } catch (error) {
       console.log(`Error while fetching the maximum number: ${error}`)
@@ -124,6 +146,9 @@ class SWContainer extends React.Component<{}, State> {
     }
   }
 
+  /**
+   * Manages the winner based on the highest metric, updates the state.
+   */
   private handleWinner = (card1: CardData, card2: CardData): string => {
     // @TODO: refactor
     if (card1.metric > card2.metric) {

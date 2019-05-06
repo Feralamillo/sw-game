@@ -50,6 +50,11 @@ export class SWBoard extends React.Component<Props>{
               />
           ))}
         </div>
+        {winner && (
+          <div className="row justify-content-md-center p-2">
+          <h2>Winner: {winner}</h2>
+        </div>
+        )} 
       </div>
     );
   }

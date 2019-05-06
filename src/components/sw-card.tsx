@@ -39,7 +39,6 @@ export class SWCard extends React.Component<Props>{
       );
     }
     
-    // @TODO: include a way to display all the data.
     return (
       <div 
         className={
