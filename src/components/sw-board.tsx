@@ -40,7 +40,6 @@ export class SWBoard extends React.Component<Props>{
         </div>
         <div className="row justify-content-md-center p-2">
           {cardData.map((card, index) => (
-            <div className="col-sm sw-card-wrapper">
               <SWCard
                 key={index}
                 cardData={card}
@@ -49,7 +48,6 @@ export class SWBoard extends React.Component<Props>{
                 score={score[index]}
                 points={points}
               />
-            </div>
           ))}
         </div>
       </div>

@@ -22,10 +22,18 @@ export class SWCard extends React.Component<Props>{
 
     if (!cardData) {
       return (
-        <div className="card text-center loading-card sw-card">
+        <div className="col-sm card text-center loading-card sw-card">
           <div className="flip">
-            <img src={IMG.BACKGROUND_LOADING_CARD} className="card-img card-front" alt="star wars" />
-            <img src={IMG.BACKGROUND_LOADING_CARD_BACK} className="card-img card-back" alt="star wars" />
+            <img 
+              src={IMG.BACKGROUND_LOADING_CARD} 
+              className="card-img card-front" 
+              alt="star wars" 
+            />
+            <img 
+              src={IMG.BACKGROUND_LOADING_CARD_BACK} 
+              className="card-img card-back" 
+              alt="star wars" 
+            />
           </div>
         </div>
       );
@@ -33,9 +41,18 @@ export class SWCard extends React.Component<Props>{
     
     // @TODO: include a way to display all the data.
     return (
-      // eslint-disable-next-line
-      <div className={classNames('card text-white text-center sw-card', {['bg-success']: (score === points)})}>
-        <img src={IMG.BACKGROUND_ACTIVE_CARD} className="card-img card-img-opacity" alt="star wars" />
+      <div 
+        className={
+          classNames('col-sm card text-white text-center sw-card', 
+          // eslint-disable-next-line
+          {['bg-success']: (score === points)})
+        }
+      >
+        <img 
+          src={IMG.BACKGROUND_ACTIVE_CARD} 
+          className="card-img card-img-opacity" 
+          alt="star wars" 
+        />
         <div className="card-img-overlay">
           <div className="card-body">
             <h1 className="card-title">
