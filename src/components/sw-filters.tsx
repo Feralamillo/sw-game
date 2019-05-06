@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { RESOURCES } from '../core/constants';
+
 interface State {
   resource: string;
   points: number;
@@ -32,12 +34,17 @@ export class SWFilters extends React.Component<Props, State>{
             <div>
               Pick the resource you want to play:
             </div>
-            <select name="resource" value={resource} onChange={this.handleSelectChange}>
-              <option value="people">People</option>
-              <option value="planets">Planets</option>
-              <option value="species">Species</option>
-              <option value="starships">Starships</option>
-              <option value="vehicles">Vehicles</option>
+            <select 
+              className="form-control form-control-lg" 
+              name="resource" 
+              value={resource} 
+              onChange={this.handleSelectChange}
+            >
+              <option value={RESOURCES.PEOPLE}>People</option>
+              <option value={RESOURCES.PLANETS}>Planets</option>
+              <option value={RESOURCES.SPECIES}>Species</option>
+              <option value={RESOURCES.STARSHIPS}>Starships</option>
+              <option value={RESOURCES.VEHICLES}>Vehicles</option>
             </select>
           </label>
         </div>

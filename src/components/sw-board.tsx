@@ -6,9 +6,11 @@ import { CardData } from '../core/types';
 import './components.css';
 
 export interface Props {
-  cardData: Array<CardData | null> | undefined;
+  cardData?: Array<CardData | null>;
   resource: string;
-  winner: string | undefined;
+  winner?: string;
+  score: Array<number>;
+  points: number;
 }
 
 /**
@@ -16,11 +18,11 @@ export interface Props {
  */
 export class SWBoard extends React.Component<Props>{ 
   public render() {
-    const { cardData, resource, winner } = this.props;
+    const { cardData, resource, winner, score, points } = this.props;
 
     if(!cardData) {
       return (
-        <div className="container h-100 p-5">
+        <div className="container h-100 p-2">
           <div className="row justify-content-md-center">
             <h2>Playing {resource}</h2>
           </div>
@@ -32,25 +34,24 @@ export class SWBoard extends React.Component<Props>{
     }
 
     return (
-      <div className="container p-5">
+      <div className="container p-2">
         <div className="row justify-content-md-center p-2">
           <h2>Playing {resource}</h2>
         </div>
         <div className="row justify-content-md-center p-2">
           {cardData.map((card, index) => (
-            <SWCard
-              key={index}
-              cardData={card}
-              winner={winner}
-              index={index}
-            />
+            <div className="col-sm sw-card-wrapper">
+              <SWCard
+                key={index}
+                cardData={card}
+                winner={winner}
+                index={index}
+                score={score[index]}
+                points={points}
+              />
+            </div>
           ))}
         </div>
-        {winner && (
-          <div className="row justify-content-md-center p-2">
-            <h2>Winner: {winner}</h2>
-          </div>
-        )}
       </div>
     );
   }

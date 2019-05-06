@@ -8,8 +8,10 @@ export interface Props {
   cardData: Array<CardData | null> | undefined;
   triggerButton: () => void;
   selectGame: (resource: string, points: number) => void;
-  resource: string | undefined;
-  winner: string | undefined;
+  resource?: string;
+  winner?: string;
+  score: Array<number>;
+  points: number;
 }
 
 /**
@@ -17,7 +19,7 @@ export interface Props {
  */
 export class SWGame extends React.Component<Props>{ 
   public render(){
-    const { cardData, triggerButton, selectGame, resource, winner } = this.props;
+    const { cardData, triggerButton, selectGame, resource, winner, score, points } = this.props;
 
     return (
       <div className="container m-4">
@@ -36,14 +38,24 @@ export class SWGame extends React.Component<Props>{
                   </div>
                 </div>
               </React.Fragment>
-            : <SWFilters selectGame={selectGame} />
+            : <div className="card card-body text-center">
+                <SWFilters selectGame={selectGame} />
+              </div>
           }
           </div>
         </div>
          {resource && (
             <React.Fragment>
-              <SWBoard cardData={cardData} resource={resource} winner={winner} />
-              <SWPlay triggerButton={triggerButton} />
+              <SWBoard 
+                cardData={cardData} 
+                resource={resource} 
+                winner={winner} 
+                score={score} 
+                points={points} 
+              />
+              {Math.max(...score) < points && (
+                <SWPlay triggerButton={triggerButton} />
+              )}
             </React.Fragment>
           )}
       </div>

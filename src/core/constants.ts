@@ -1,28 +1,13 @@
-export const LEIA_EXAMPLE = {
-  name: "Leia Organa", 
-  height: "150", 
-  mass: "49", 
-  hair_color: "brown", 
-  skin_color: "light", 
-  eye_color: "brown", 
-  birth_year: "19BBY", 
-  gender: "female", 
-  homeworld: "https://swapi.co/api/planets/2/", 
-  films: [
-      "https://swapi.co/api/films/2/", 
-      "https://swapi.co/api/films/6/", 
-      "https://swapi.co/api/films/3/", 
-      "https://swapi.co/api/films/1/", 
-      "https://swapi.co/api/films/7/"
-  ], 
-  species: [
-      "https://swapi.co/api/species/1/"
-  ], 
-  vehicles: [
-      "https://swapi.co/api/vehicles/30/"
-  ], 
-  starships: [], 
-  created: "2014-12-10T15:20:09.791000Z", 
-  edited: "2014-12-20T21:17:50.315000Z", 
-  url: "https://swapi.co/api/people/5/"
-}
+export const RESOURCES = {
+    PEOPLE: 'people',
+    PLANETS: 'planets',
+    SPECIES: 'species',
+    STARSHIPS: 'starships',
+    VEHICLES: 'vehicles'
+} 
+
+export const IMG = {
+    BACKGROUND_ACTIVE_CARD: 'https://hips.hearstapps.com/digitalspyuk.cdnds.net/18/31/1533225054-mark-hamill-and-carrie-fisher-star-wars.jpg?crop=0.848xw:0.896xh;0.128xw,0&resize=480:*',
+    BACKGROUND_LOADING_CARD: 'https://hips.hearstapps.com/digitalspyuk.cdnds.net/18/31/1533225054-mark-hamill-and-carrie-fisher-star-wars.jpg?crop=0.848xw:0.896xh;0.128xw,0&resize=480:*',
+    BACKGROUND_LOADING_CARD_BACK: 'https://cdn.images.express.co.uk/img/dynamic/36/590x/Star-wars-9-Anakin-and-Darth-Vader-force-ghost-leak-985172.jpg?r=1533001198664'
+};
