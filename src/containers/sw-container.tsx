@@ -32,7 +32,6 @@ class SWContainer extends React.Component<{}, State> {
 
   public render() {
     const { cardData, resource, winner, score, points } = this.state;
-    console.log(score);
 
     return (
       <div className="container h-100 sw-background">
@@ -56,10 +55,13 @@ class SWContainer extends React.Component<{}, State> {
     this.handleGame();
   }
 
-  private selectGame = (resource: string, points: number) => {
+  private selectGame = async (resource: string, points: number) => {
+    const maxNumAPI = await this.handleAPICallMaxNumber(resource);
+    
     this.setState({
       resource, 
       points,
+      maxNumAPI,
       cardData: undefined,
       score: [0, 0],
       winner: undefined
@@ -71,8 +73,8 @@ class SWContainer extends React.Component<{}, State> {
     if (!resource) {
       return;
     }
-    // This should go in utils functions
-    // @TODO: depending on the resource the max number is different
+
+    // @TODO: This should go in utils functions
     const num1 = getRandomIntInclusive(1, maxNumAPI);
     let num2 = getRandomIntInclusive(1, maxNumAPI);
 
@@ -98,10 +100,8 @@ class SWContainer extends React.Component<{}, State> {
       }, 2000);
     };
 
-    // @TODO: if there is an error, catch returns null. Should do something in the state
-    // this.setState({
-    //   cardData: undefined
-    // });
+    // @TODO: if there is an error, catch returns null. Should do something in the state.
+    // For now infinite loading until we get a response.
   }
 
   private handleAPICall = async (resource: string, num: number): Promise<CardData | null> => {
@@ -114,7 +114,18 @@ class SWContainer extends React.Component<{}, State> {
     }
   }
 
+  private handleAPICallMaxNumber = async (resource: string): Promise<number> => {
+    try {
+      const response = await axios.get(`https://swapi.co/api/${resource}/`);
+      return response.data.count; 
+    } catch (error) {
+      console.log(`Error while fetching the maximum number: ${error}`)
+      return 5;
+    }
+  }
+
   private handleWinner = (card1: CardData, card2: CardData): string => {
+    // @TODO: refactor
     if (card1.metric > card2.metric) {
       this.setState(prevState => ({
         score: [

@@ -33,7 +33,8 @@ export class SWCard extends React.Component<Props>{
     
     // @TODO: include a way to display all the data.
     return (
-      <div className={classNames('card text-white text-center sw-card', {['bg-success']: score === points})}>
+      // eslint-disable-next-line
+      <div className={classNames('card text-white text-center sw-card', {['bg-success']: (score === points)})}>
         <img src={IMG.BACKGROUND_ACTIVE_CARD} className="card-img card-img-opacity" alt="star wars" />
         <div className="card-img-overlay">
           <div className="card-body">
